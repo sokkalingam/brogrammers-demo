@@ -1,0 +1,23 @@
+name: brogrammers build
+
+on:
+  push:
+    branches: [ master ]
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      env: 
+        DOCKER_ID: ${{ SECRETS.DOCKER_REG_ID }}
+        DOCKER_KEY: ${{ SECRETS.DOCKER_REG_KEY }}
+      run: |
+        echo "$DOCKER_KEY" | docker login docker.io --username $DOCKER_ID  --password-stdin
+    - name: braogrammers-demo build
+      run: |
+        docker build . -t abigillu/ab-playground:latest             
+    - name: brogrammers-demo push 
+      run : |
+        docker push abigillu/ab-playground:latest
