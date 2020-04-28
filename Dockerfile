@@ -1,11 +1,6 @@
-FROM alpine:3.7
-
-RUN apk update && apk add git maven openjdk8 
-
-WORKDIR /home/brogram
-
-RUN git clone https://github.com/sokkalingam/brogrammers-demo
-
-EXPOSE  8080
-
-RUN cd brogrammers-demo
+FROM openjdk:8-jdk-alpine
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
