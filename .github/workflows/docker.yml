@@ -1,4 +1,4 @@
-name: brogrammers build
+name: brogrammers-demo build
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
         echo "$DOCKER_KEY" | docker login docker.io --username $DOCKER_ID  --password-stdin
     - name: braogrammers-demo build
       run: |
-        docker build . -t abigillu/ab-playground:latest             
+        docker build . -t lings24/demo-app:latest             
     - name: brogrammers-demo push 
       run : |
-        docker push abigillu/ab-playground:latest
+        docker push lings24/demo-app:latest
