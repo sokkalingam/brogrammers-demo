@@ -1,4 +1,4 @@
-name: brogrammers-demo build
+name: brogrammers-server build
 
 on:
   push:
@@ -15,9 +15,9 @@ jobs:
         DOCKER_KEY: ${{ SECRETS.DOCKER_HUB_KEY }}
       run: |
         echo "$DOCKER_KEY" | docker login docker.io --username $DOCKER_ID  --password-stdin
-    - name: brogrammers-demo build
+    - name: brogrammers-server build
       run: |
         docker build . -t lings24/demo-app:latest             
-    - name: brogrammers-demo push 
+    - name: brogrammers-server push 
       run : |
         docker push lings24/demo-app:latest
