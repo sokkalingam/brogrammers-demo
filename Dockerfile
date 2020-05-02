@@ -1,16 +1,11 @@
-FROM ubuntu:xenial-20200326
+FROM maven:3.6.1-jdk-8-slim
 
-RUN apt-get update && \
-    apt-get install -y openjdk-8-jdk && \
-    apt-get install -y maven
-
-WORKDIR /usr/local/brocode
-
-COPY src        ./src
-COPY pom.xml    ./
+WORKDIR /server
+COPY src /server/src
+COPY pom.xml /server
 
 RUN mvn clean install -DskipTests
-
 RUN mv ./target/*.jar ./target/app.jar
 
+EXPOSE 8080
 ENTRYPOINT [ "java", "-jar", "./target/app.jar" ]
