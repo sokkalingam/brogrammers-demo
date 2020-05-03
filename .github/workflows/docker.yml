@@ -17,7 +17,7 @@ jobs:
         echo "$DOCKER_KEY" | docker login docker.io --username $DOCKER_ID  --password-stdin
     - name: brogrammers-server build
       run: |
-        docker build ./server -t lings24/demo-app:latest             
+        docker build . -t lings24/brogrammers-server:latest
     - name: brogrammers-server push 
       run : |
-        docker push lings24/demo-app:latest
+        docker push lings24/brogrammers-server:latest
